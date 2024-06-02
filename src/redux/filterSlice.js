@@ -3,12 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const filterSlice = createSlice({
   name: "filter",
   initialState: "",
+
   reducers: {
-    setFilter(state, action) {
-      return (state) => !action.payload;
+    setFilter: (state, action) => {
+      //   console.log("setFilter action >> ", action);
+
+      return action.payload;
     },
   },
 });
 
+//Генератори екшенів
 export const { setFilter } = filterSlice.actions;
-export default filterSlice.reducer;
+
+// Редюсер слайсу
+export const filterReducer = filterSlice.reducer;

@@ -7,27 +7,27 @@ const initialState = [
   { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 ];
 
-export const contactsSlice = createSlice({
+const contactsSlice = createSlice({
   name: "contacts",
   initialState,
 
   reducers: {
     addContact(state, action) {
-      console.log("action >> ", action);
-      return state.push(action.payload);
+    //   console.log("addContact action >>", action);
+
+      state.push(action.payload);
     },
 
-    removeContact(state, action) {
-      console.log("action >> ", action);
+    deleteContact(state, action) {
+    //   console.log("deleteContact action >>", action);
 
       return state.filter((contact) => contact.id !== action.payload);
     },
   },
 });
 
-// - actions
-export const { addContact, removeContact } = contactsSlice.actions;
+// Генератори екшенів
+export const { addContact, deleteContact } = contactsSlice.actions;
 
-// - reducer
-// export const contactsReducer = contactsSlice.reducer;
-export default contactsSlice.reducer;
+// Редюсер слайсу
+export const contactReducer = contactsSlice.reducer;

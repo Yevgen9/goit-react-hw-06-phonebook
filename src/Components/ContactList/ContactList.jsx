@@ -1,24 +1,28 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { removeContact } from "../../redux/contactsSlice";
-import s from "./ContactList.module.scss";
+import { deleteContact } from "../../redux/contactsSlice";
+import s from "../ContactList/ContactList.module.scss";
 
 const ContactsList = () => {
   const contacts = useSelector((state) => state.contacts);
+  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase().trim())
+  );
 
   return (
     <ul className={s.list}>
-      {contacts &&
-        contacts.map((contact) => (
+      {filteredContacts &&
+        filteredContacts.map((contact) => (
           <li key={contact.id} className={s.item}>
-            <p className={s.textName}> {contact.name}:</p>
-            <p className={s.textNumber}>{contact.number}</p>
+            <p>{contact.name}:</p>
+            <p>{contact.number}</p>
             <button
-              onClick={() => dispatch(removeContact(contact.id))}
               className={s.btnDel}
-              type="button"
+              onClick={() => dispatch(deleteContact(contact.id))}
             >
               Delete
             </button>
