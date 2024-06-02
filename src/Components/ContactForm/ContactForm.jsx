@@ -17,7 +17,7 @@ export default function ContactForm() {
   const [form, setForm] = useState(INITIAL_STATE);
 
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts);
+  const { contacts } = useSelector((state) => state.contacts);
 
   const handleChangeForm = ({ target }) => {
     const { name, value } = target;
