@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -13,21 +15,30 @@ const contactsSlice = createSlice({
 
   reducers: {
     addContact(state, action) {
-    //   console.log("addContact action >>", action);
+      //   console.log("addContact action >>", action);
 
       state.push(action.payload);
     },
 
     deleteContact(state, action) {
-    //   console.log("deleteContact action >>", action);
+      //   console.log("deleteContact action >>", action);
 
       return state.filter((contact) => contact.id !== action.payload);
     },
   },
 });
 
-// Генератори екшенів
+const persistConfig = {
+  key: "contacts",
+  storage,
+  whitelist: initialState,
+};
+
 export const { addContact, deleteContact } = contactsSlice.actions;
 
-// Редюсер слайсу
-export const contactReducer = contactsSlice.reducer;
+// export const contactReducer = contactsSlice.reducer;
+
+export const contactReducer = persistReducer(
+  persistConfig,
+  contactsSlice.reducer
+);
