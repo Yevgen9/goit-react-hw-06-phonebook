@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { nanoid } from "nanoid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { addContact } from "../../redux/contactsSlice";
 import s from "./ContactForm.module.scss";
@@ -37,24 +40,55 @@ export default function ContactForm() {
 
     dispatch(addContact(newContact));
 
+    toast.success(`You added a contact ${name}`, {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
     resetForm();
   };
 
   const validateForm = () => {
     const { name, number } = form;
     if (!name || !number) {
-      alert("Some filed is empty");
+      toast.error("Some filed is empty", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
 
       return false;
     }
     return handleCheckContact();
   };
 
-  const handleCheckContact = (name) => {
+  const handleCheckContact = () => {
     const isExistContact = !!contacts.find((contact) => contact.name === name);
-    console.log(isExistContact);
 
-    isExistContact && alert(`${name} is already exist`);
+    isExistContact &&
+      toast.info(`${name} is already exist`, {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+    resetForm();
 
     return !isExistContact;
   };
@@ -66,7 +100,8 @@ export default function ContactForm() {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
   return (
-    <div>
+    <div className={s.formContainer}>
+      <ToastContainer />
       <form className={s.form} onSubmit={handleFormSubmit}>
         <p className={s.text}>Name</p>
         <input

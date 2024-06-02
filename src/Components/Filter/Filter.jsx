@@ -8,13 +8,16 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   return (
-    <input
-      className={s.filterForm}
-      type="text"
-      name="filter"
-      onChange={(e) => dispatch(setFilter(e.currentTarget.value))}
-      placeholder="Enter text"
-    ></input>
+    <div className={s.filterContainer}>
+     
+      <input
+        className={s.filterInput}
+        type="text"
+        name="filter"
+        onChange={(e) => dispatch(setFilter(e.currentTarget.value))}
+        placeholder="Enter text"
+      ></input>
+    </div>
   );
 };
 

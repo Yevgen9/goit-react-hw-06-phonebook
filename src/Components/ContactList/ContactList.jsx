@@ -14,12 +14,12 @@ const ContactsList = () => {
   );
 
   return (
-    <ul className={s.list}>
-      {filteredContacts &&
-        filteredContacts.map((contact) => (
+    <div className={s.listContainer}>
+      <ul>
+        {filteredContacts.map((contact) => (
           <li key={contact.id} className={s.item}>
             <p>{contact.name}:</p>
-            <p>{contact.number}</p>
+            <p className={s.textNumber}>{contact.number}</p>
             <button
               className={s.btnDel}
               onClick={() => dispatch(deleteContact(contact.id))}
@@ -28,7 +28,8 @@ const ContactsList = () => {
             </button>
           </li>
         ))}
-    </ul>
+      </ul>
+    </div>
   );
 };
 

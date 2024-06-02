@@ -1,17 +1,23 @@
-.list {
+.listContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .item {
   display: flex;
+  justify-content: space-around;
   font-size: 20px;
 }
 
 .item:not(:last-child) {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.textNumber {
+  margin-left: 15px;
 }
 
 .btnDel {
-  margin-left: 1%;
+  margin-left: 15px;
 }

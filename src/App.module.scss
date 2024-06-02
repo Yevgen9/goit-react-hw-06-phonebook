@@ -1,15 +1,18 @@
-.App {
-  text-align: center;
-}
-
 h1,
 h2,
-h3,
 p {
   margin: 0;
   padding: 0;
+
+  text-align: center;
 }
 
 li {
   list-style: none;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
